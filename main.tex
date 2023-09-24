@@ -1,0 +1,82 @@
+%!TEX TS-program = xelatex
+
+\documentclass[a4paper,14pt]{article}
+
+% Название дисциплины, имя преподавателя и т.д.
+\include{settings/worksSettings}
+
+% Используемые пакеты и настройки
+\include{settings/packages}
+
+% Используемые функции
+\include{settings/myFunctions}
+
+\begin{document}
+	% 1. Титульный лист
+    % \include{templates/titlePage}
+	% Титульник
+    % \includepdf[pages=-,  scale=1]{pdfs/01_Титульник.pdf}
+	% Индивидуальный план
+    % \includepdf[pages=-,  scale=1]{pdfs/02_ИП.pdf}
+
+	% 2. Задание на ВКР
+
+	% 3. Реферат
+	\newpage
+	\section*{РЕФЕРАТ}
+		\setcounter{section}{0} 
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/30_Реферат}
+%	\newpage
+%		\section*{ABSTRACT}
+%		\setcounter{section}{0} 
+%		\setcounter{subsection}{0}
+%		\setcounter{figure}{0}
+%		\setcounter{table}{0}
+%		\subfile{sections/31_Abstract}
+	
+	% 4. Содержание
+	\newpage
+	\renewcommand{\contentsname}{\normalfont\centering\bfseries СОДЕРЖАНИЕ}
+	\singlespacing  % Change spacing only for TOC
+	\tableofcontents
+	\onehalfspacing
+	\thispagestyle{empty}
+	
+	
+	% 5. Введение
+	\newpage
+	\section*{ВВЕДЕНИЕ}
+		\addcontentsline{toc}{section}{Введение}
+		\addtocontents{toc}{\protect\thispagestyle{empty}}  % To delete page number from toc
+		\setcounter{section}{0} 
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/50_Введение}
+
+	
+	% 6. Основная часть
+	\include{sections/60_Основная-часть}
+	
+	% 7. Заключение
+	\newpage
+	\section*{ЗАКЛЮЧЕНИЕ}
+		\addcontentsline{toc}{section}{Заключение}
+		\setcounter{section}{0} 
+		\setcounter{subsection}{0}
+		\setcounter{figure}{0}
+		\setcounter{table}{0}
+		\subfile{sections/70_Заключение}
+	
+	% 8. Список использованных источников
+	\include{sections/80_Источники}
+	
+	% 9. Приложения
+	\include{sections/90_Приложения}
+
+\end{document}
+
+

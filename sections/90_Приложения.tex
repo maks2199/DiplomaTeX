@@ -1,0 +1,61 @@
+% !TEX root = main.tex
+
+%\vspace*{40ex}
+%\appendix
+%\section*{ПРИЛОЖЕНИЯ}
+\addcontentsline{toc}{section}{Приложения}
+\renewcommand{\thesubsection}{\Alph{subsection}.}  % Буквы в  subsections
+\renewcommand\thetable{\arabic{subsection}.\arabic{table}} 
+\setcounter{section}{0} 
+\setcounter{subsection}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+% Change header height
+%\setlength{\headheight}{3\baselineskip}
+%\setlength{\headsep}{12pt}
+%\fancyhead[L]{\rule{30pt}{2pt}}}
+
+\addcontentsline{toc}{subsection}{Приложение 1. Название приложения}
+\setcounter{subsection}{1}
+\includepdf[pages=-,  scale=1]{pdfs/pdf1.pdf}
+
+\newgeometry{left=20mm, top=20mm, right=20mm, bottom=20mm}
+
+
+
+\newpage
+%\rhead{\fontsize{14pt}{16pt}\selectfont\thepage\linebreak Приложение 2}
+\rhead{\fontsize{14pt}{16pt}\selectfont\thepage}
+Приложение 2\raggedleft
+\addcontentsline{toc}{subsection}{Приложение 2. Название приложения}
+\setcounter{subsection}{2}
+
+\begin{center}
+	\textbf{Название приложения}
+\end{center}
+
+\justifying
+Текст приложения...
+
+
+\newpage
+%\rhead{\fontsize{14pt}{16pt}\selectfont\thepage\linebreak Приложение 3}
+\rhead{\fontsize{14pt}{16pt}\selectfont\thepage}
+Приложение 3 \raggedleft
+\addcontentsline{toc}{subsection}{Приложение 3. Название приложения}
+\setcounter{subsection}{3}
+
+\begin{center}
+	\textbf{Название приложения}
+\end{center}
+
+\justifying
+Текст приложения...
+
+
+
+
+
+
+

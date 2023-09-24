@@ -1,0 +1,362 @@
+% !TEX root = main.tex
+
+% Раскраска таблицы
+\usepackage[table]{xcolor}
+\def\colorModel{hsb} %You can use rgb or hsb
+
+\newcommand\ColCell[1]{
+	% \pgfmathparse{#1<70?1:0}  %Threshold for changing the font color into the cells
+	% \ifnum\pgfmathresult=0\relax\color{black}\fi
+	\pgfmathsetmacro\compA{#1/300}   %Component R or H
+	% \pgfmathsetmacro\compA{1}   %Component R or H
+	\pgfmathsetmacro\compB{0.5}           %Component G or S
+	\pgfmathsetmacro\compC{0.99}             %Component B or B
+	\edef\x{\noexpand\cellcolor[\colorModel]{\compA,\compB,\compC}}\x #1} 
+
+
+\newcolumntype{F}[1]{>{\collectcell\ColCell}#1<{\endcollectcell}}  %Cell width
+
+%%% Работа с русским языком
+
+\usepackage[english,russian]{babel}   %% загружает пакет многоязыковой вёрстки
+\usepackage{fontspec}      %% подготавливает загрузку шрифтов Open Type, True Type и др.
+	\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  %% свойства шрифтов по умолчанию
+	\setmainfont[Ligatures={TeX,Historic}]{Times New Roman} %% задаёт основной шрифт документа
+	\setsansfont{Comic Sans MS}                    %% задаёт шрифт без засечек
+	\setmonofont{Courier New}
+\usepackage{mathtext} % русские буквы в формулах
+\usepackage{amsmath} % русские буквы в формулах
+	\numberwithin{equation}{section}	
+	
+%\babelprovide[alph=alphabetic]{russian}
+%\usepackage{babel}
+%\babelprovide[alph=upper]{russian}
+
+
+%%% Страница
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+	\geometry{top=20mm}
+	\geometry{bottom=20mm}
+	\geometry{left=30mm}
+	\geometry{right=10mm}
+
+\usepackage{setspace} % Интерлиньяж
+	\onehalfspacing % Интерлиньяж 1.5
+	%\doublespacing % Интерлиньяж 2
+	%\singlespacing % Интерлиньяж 1
+
+\usepackage{float} % Борьба с улетающими таблицами и рисунками
+
+% Колонтитулы
+\usepackage{fancyhdr} % Колонтитулы
+	\pagestyle{fancy}
+	\renewcommand{\headrulewidth}{0mm}  % Толщина линейки, отчеркивающей верхний колонтитул
+	\lfoot{}
+	\rfoot{}
+	\rhead{\fontsize{14pt}{16pt}\selectfont\thepage}
+	\chead{}
+	\lhead{}
+	\cfoot{}
+
+\usepackage{multicol} % Несколько колонок
+
+% Абзацы
+\setlength{\parindent}{1.25cm} % Отступ первой строки абзаца
+\setlength{\parskip}{0pt} % Интервал между абзацами
+
+% еерованные списки
+\renewcommand{\theenumii}{\arabic{enumii}} % назначаем второму уровню списка (ii) арабские цифры
+\renewcommand{\labelenumii}{\theenumii)}   % назначаем обозначение второго уровня списка как цифра выше + )
+\makeatletter
+\renewcommand{\p@enumii}{\theenumi.}       % постфикс для ссылок между 1-м и 2-м уровнем списка
+\makeatother
+ 
+% Выделение текста желтым маркером
+\usepackage{color,soul}
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+% Для заголовков таблиц, рисунков...
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{titlesec}
+	% Точки после разделов
+	\renewcommand{\thesection}{\arabic{section}.}
+	\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+	\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+	% Оформление раздела (section)
+	\titleformat{\section}{\normalfont\normalsize\centering\bfseries}{\thesection}{1ex}{\setstretch{0.5}}
+\usepackage[dotinlabels]{titletoc}  % setstrech -- интерлиньяж
+	% Оформление раздела (subsection)
+	\titleformat{\subsection}[block]{\hspace{2.5em}\normalfont\normalsize\justifying\bfseries}{\thesubsection}{1ex}{}
+%	\titlespacing*{\subsection}{\parindent}{1ex}{1em}
+	% Оформление раздела (subsubsection)
+	\titleformat{\subsubsection}{\normalfont\normalsize\centering\bfseries}{\thesubsubsection}{1ex}{}
+	%%% подпись таблицы
+	
+	% Для разного выравнения label и caption
+	\usepackage{threeparttable}
+	\DeclareCaptionFormat{diploma}{\raggedleft #1\\\centering #3}%
+	\captionsetup[table]{format=plain,labelsep=newline,justification=centerlast,textfont=normalfont, format=diploma, font={small,{stretch=1.2}},belowskip=0pt,aboveskip=0pt}
+	
+	% Для выравнивания подписей к длинным таблицам
+	\newcommand\firstcaption[1]{\captionsetup[table]{format=plain,labelsep=newline,justification=centerlast,textfont=normalfont, format=diploma}\caption{#1}}
+	\newcommand\followingcaption[1]{\captionsetup[table]{format=plain,labelsep=newline,justification=raggedleft,textfont=normalfont, format=diploma}\caption[]{#1}}
+	\captionsetup[figure]{labelsep = period, font={small,{stretch=1.2}},belowskip=-36pt}
+	\captionsetup[lstlisting]{labelsep = period}
+%	\setlength{\abovecaptionskip}{0pt} 
+%	\setlength{\belowcaptionskip}{0pt} 
+	\setlength{\intextsep}{21pt}
+
+% локализация
+\addto\captionsrussian{
+	\renewcommand{\figurename}{\piclabel}%
+}	
+
+% Нумерация рисунков по разделам
+\renewcommand\thefigure{\arabic{section}.\arabic{figure}} 
+% Нумерация таблиц по разделам
+\renewcommand\thetable{\arabic{section}.\arabic{table}} 
+	
+	
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+	\graphicspath{% папки с картинками
+		{images/}
+		{images/Task1}
+		{images/Task2}
+		{images/Task3}
+		{images/Task4}
+	}  
+	\setlength\fboxsep{1pt} % Отступ рамки \fbox{} от рисунка
+	\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+	
+%%% Абзацный отступ после заголовка (наличие его зависит от традиций)
+\usepackage{indentfirst}
+
+%%% Вставка других документов
+\usepackage{pdfpages}
+
+%%% Дополнительная работа с математикой (для длинной формулы)
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%-----------------------------------------------------
+%%% Настраиваем страницу "Содержание"
+\usepackage{tocloft}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % многоточие для глав
+
+\renewcommand\cfttoctitlefont{\hfill\fontsize{14pt}{16pt}\selectfont\bfseries} % разместить по середине
+\renewcommand\cftaftertoctitle{\hfill\mbox{}}
+
+% Убрать лишние точки в нумерации уравнений
+\renewcommand{\theequation}{\thesection\arabic{equation}} % В самом уравнении
+
+% Не Жирный шрифт в Содержании
+\renewcommand\cftsecfont{\mdseries}
+\renewcommand\cftsecpagefont{\mdseries}
+% Интервал между секциями
+\setlength{\cftbeforesecskip}{0pt}
+\renewcommand\cftsubsecafterpnum{\vskip 0pt} % for spacing after each entry
+\setlength\cftparskip{2pt}
+%-----------------------------------------------------
+
+% Работа с несколькими файлами
+\usepackage{subfiles} % Best loaded last in the preamble
+
+% Кастомизация itemize, enumerate
+\usepackage{enumitem}
+\setlist{noitemsep} % Интервалы
+\setlist{nosep}
+%\setlength{\itemindent}{5cm}
+
+% Кастомизация одной страницы
+\usepackage{afterpage}
+\usepackage{changepage}
+
+% Комментирование
+\usepackage{verbatim}
+
+% Две картинки в одной
+\usepackage{subcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Работа с библиографией %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Список литературы по ГОСТу
+% sorting=none -- сортировка по порядку цитирования
+\usepackage[
+sorting=nty,
+parentracker=true,
+backend=biber,
+hyperref=false,
+language=auto,
+autolang=other,
+citestyle=gost-numeric,
+defernumbers=true,
+bibstyle=gost-numeric, % Стиль с нумерацией
+]{biblatex}
+
+\renewcommand*{\mkgostheading}[1]{#1}  % Убрать italic из стаднартного стиля заголовка heading в библиографии по ГОСТу
+
+\urlstyle{same}  % Сделать шрифт URL таким же, как и у остального текста
+
+% Отступы у списка 
+%\setlength{\bibhang}{12pt}
+\defbibenvironment{bibliography}
+{\list{}
+	{
+		\setlength{\leftmargin}{0pt}%
+		\setlength{\itemindent}{1cm}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}
+}}
+{\endlist}
+{\item
+	\printtext[labelnumberwidth]{%
+		\printfield{labelprefix}%
+		\printfield{labelnumber}}%
+	\addspace}
+
+% Интервал между элементами:
+\setlength\bibitemsep{0pt}
+
+% БД источников
+\addbibresource{bibliography.bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Работа с несколькими файлами
+\usepackage{subfiles} % Best loaded last in the preamble
+
+% Именные ссылки
+\usepackage{nameref}
+
+% Комментирование
+\usepackage{verbatim}
+
+% Графики
+\usepackage{tikz,pgfplots,pgfplotstable}
+
+% Альбомная ориентация
+\usepackage{pdflscape}
+
+% Шрифт на графиках
+\usepackage{pgfplots}
+\pgfplotsset{
+	tick label style = {font = {\fontsize{6 pt}{8 pt}\selectfont}},
+	label style = {font = {\fontsize{12 pt}{12 pt}\selectfont}},
+	legend style = {font = {\fontsize{12 pt}{12 pt}\selectfont}},
+	y tick label style={font = {\fontsize{12 pt}{12 pt}\selectfont}}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Для оформления кода %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% color def
+\usepackage{color}
+\definecolor{darkred}{rgb}{0.6,0.0,0.0}
+\definecolor{darkgreen}{rgb}{0,0.50,0}
+\definecolor{lightblue}{rgb}{0.0,0.42,0.91}
+\definecolor{orange}{rgb}{0.99,0.48,0.13}
+\definecolor{grass}{rgb}{0.18,0.80,0.18}
+\definecolor{pink}{rgb}{0.97,0.15,0.45}
+
+% listings
+\usepackage{listings}
+
+% General Setting of listings
+\lstset{
+	aboveskip=1em,
+	breaklines=true,
+	abovecaptionskip=-6pt,
+	captionpos=top,
+	escapeinside={\%*}{*)},
+	frame=single,
+	numbers=left,
+	numbersep=15pt,
+	numberstyle=\tiny,
+	language = Python,
+}
+
+
+
+% 0. Basic Color Theme
+\lstdefinestyle{colored}{ %
+	basicstyle=\ttfamily,
+	backgroundcolor=\color{white},
+	commentstyle=\color{green}\itshape,
+	keywordstyle=\color{blue}\bfseries\itshape,
+	stringstyle=\color{red},
+}
+% 1. General Python Keywords List
+\lstdefinelanguage{PythonPlus}[]{Python}{
+	morekeywords=[1]{,as,assert,nonlocal,with,yield,self,True,False,None,} % Python builtin
+	morekeywords=[2]{,__init__,__add__,__mul__,__div__,__sub__,__call__,__getitem__,__setitem__,__eq__,__ne__,__nonzero__,__rmul__,__radd__,__repr__,__str__,__get__,__truediv__,__pow__,__name__,__future__,__all__,}, % magic methods
+	morekeywords=[3]{,object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,list,set,len,dict,tuple,range,xrange,append,execfile,real,imag,reduce,str,repr,}, % common functions
+	morekeywords=[4]{,Exception,NameError,IndexError,SyntaxError,TypeError,ValueError,OverflowError,ZeroDivisionError,}, % errors
+	morekeywords=[5]{,ode,fsolve,sqrt,exp,sin,cos,arctan,arctan2,arccos,pi, array,norm,solve,dot,arange,isscalar,max,sum,flatten,shape,reshape,find,any,all,abs,plot,linspace,legend,quad,polyval,polyfit,hstack,concatenate,vstack,column_stack,empty,zeros,ones,rand,vander,grid,pcolor,eig,eigs,eigvals,svd,qr,tan,det,logspace,roll,min,mean,cumsum,cumprod,diff,vectorize,lstsq,cla,eye,xlabel,ylabel,squeeze,}, % numpy / math
+}
+% 2. New Language based on Python
+\lstdefinelanguage{PyBrIM}[]{PythonPlus}{
+	emph={d,E,a,Fc28,Fy,Fu,D,des,supplier,Material,Rectangle,PyElmt},
+}
+% 3. Extended theme
+\lstdefinestyle{colorEX}{
+	basicstyle=\ttfamily,
+	backgroundcolor=\color{white},
+	commentstyle=\color{darkgreen}\slshape,
+	keywordstyle=\color{blue}\bfseries\itshape,
+	keywordstyle=[2]\color{blue}\bfseries,
+	keywordstyle=[3]\color{grass},
+	keywordstyle=[4]\color{red},
+	keywordstyle=[5]\color{orange},
+	stringstyle=\color{darkred},
+	emphstyle=\color{pink}\underbar,
+}
+
+\lstset{style=colored}
+
+% Точка в caption
+\usepackage{chngcntr}
+%\AtBeginDocument{\counterwithin{lstlisting}{section}}
+\AtBeginDocument{\renewcommand{\thelstlisting}{\thesection\arabic{lstlisting}}}
+
+
+% ---------------------------------------------------------------------------
+% Раскраска таблицы
+\usepackage{longtable}
+\usepackage{makecell} 
+
+\usepackage{collcell}
+\usepackage{pgf}
+% ---------------------------------------------------------------------------
+
+% Всего страниц
+\usepackage{zref-totpages}
+% Подсчет рисунков, таблиц
+\usepackage{xassoccnt}
+\NewTotalDocumentCounter{totalfigures}
+\NewTotalDocumentCounter{totaltables}
+\NewTotalDocumentCounter{appendixchapters}
+\DeclareAssociatedCounters{figure}{totalfigures}
+\DeclareAssociatedCounters{table}{totaltables}
+
+
+% Приложения
+%\usepackage[title]{appendix}
+%\renewcommand{\appendixtocname}{ПРИЛОЖЕНИЯ}
+%\renewcommand{\appendixname}{Приложение}
+%\renewcommand{\setthesubsection}{Приложение \Alph{subsection}.}
+
+% Выравнивание после raggedright
+\usepackage{ragged2e}

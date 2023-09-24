@@ -1,0 +1,103 @@
+% !TEX root = ../main.tex
+
+\documentclass[../main.tex]{subfiles}
+
+\graphicspath{{\subfix{../images/}}}
+
+\begin{document}
+
+\subsection{Параграф 1}
+
+В работе \cite{sostojanie-Makashina} проведен анализ... (см. Таблица \ref{tab:ModelCheckSoft})
+
+
+
+\aboverulesep=0ex % to avoid gap in borders in longtable
+\belowrulesep=0ex
+\begin{small}
+\begin{longtable}[t]	
+	% Structure
+	{
+		|>{\raggedright}p{0.15\linewidth} | 
+		>{\raggedright}p{0.15\linewidth} |
+		>{\raggedright}p{0.25\linewidth} |
+		>{\raggedright}p{0.12\linewidth} |
+		>{\raggedright\arraybackslash}p{0.18\linewidth}|
+	} 
+	
+	% Name and label
+	\caption{Название таблицы \cite{sostojanie-Makashina}} \label{tab:ModelCheckSoft}\\
+%	\firstcaption{Результаты анализа программ проверки информационных моделей строительных объектов \cite{sostojanie-Makashina}} \label{tab:ModelCheckSoft}}\\ 
+	
+	\midrule
+	Колонка 1 & Колонка 1 & Колонка 1 & Колонка 1 & Колонка 1 \\
+	\midrule
+	\endfirsthead
+	
+	\caption*{Продолжение таблицы \ref{tab:ModelCheckSoft}\raggedleft}\\\midrule
+%	\followingcaption{Продолжение таблицы \ref{tab:ModelCheckSoft}}\\\midrule
+	1 & 2 & 3 & 4 & 5 \\
+	\midrule
+	\endhead
+	
+	
+	\endfoot
+	\midrule
+	\endlastfoot
+	
+	% Header
+	1 & 2 & 3 & 4 & 5 \\
+	\midrule
+	
+	% Content 
+	... &
+	... &
+	... &
+	... &
+	... \\
+	\midrule
+	... &
+	... &
+	... &
+	... &
+ 
+\end{longtable}
+\end{small}
+
+
+
+В работе \cite{FAN2019102842} указывается, что ...
+
+\subsection{Параграф 2}	
+
+В работе \cite{KIVITS2023} указываются...
+
+\subsection{Параграф 3}	
+
+В работе \cite{Elfimova-verifInfNap} приводится ... (см. \piclabel \ref{pic:image1})
+
+\myPictureNoBox{0.9\linewidth}{image1}{Картинка 1 \cite{Elfimova-verifInfNap}}{pic:image1}
+
+ \begin{figure}[H]
+ 	\begin{center}
+ 		\includegraphics[width=0.99\linewidth]{images/image1.jpg}
+ 		\captionsetup{justification=centering}
+ 		\caption*{Дополнительная подпись}
+ 		\vspace{2em}
+ 		\caption{Название картинки \cite{ГОСТ_58439-2}} 
+ 		\label{pic:GOST-scheme}		
+ 	\end{center}
+ \end{figure}
+ 
+
+
+
+
+\subsection{Выводы по главе}
+
+1. Вывод 1.
+
+2. Вывод 2.
+
+\end{document}
+

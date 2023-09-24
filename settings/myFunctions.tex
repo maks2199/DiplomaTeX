@@ -1,0 +1,41 @@
+% !TEX root = main.tex
+
+% Вставка рисунка с рамкой
+\newcommand{\myPicture}[4]{
+	\begin{figure}[H]
+		\begin{center}
+			\fcolorbox{black}{white}{\includegraphics[width=#1]{#2}}
+			\captionsetup{justification=centering}
+			\caption{#3}
+			\label{#4}
+		\end{center}
+	\end{figure}
+}
+
+% Вставка рисунка без рамки
+\newcommand{\myPictureNoBox}[4]{
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=#1]{#2}
+			\captionsetup{justification=centering}
+			\caption{#3}
+			\label{#4}
+		\end{center}
+	\end{figure}
+}
+
+%%%% Единицы измерения
+
+% (м2·°С)/Вт
+\newcommand\SIteploper{(\text{м}^2 \cdot \textdegree C)/\text{Вт}}
+% Вт/(м2·°С)
+\newcommand\SIteplootd{\text{Вт}/(\text{м}^2 \cdot \textdegree C)}
+
+%%% Обозначения таблиц и руснков
+%\newcommand\piclabel{Рисунок\thinspace}
+\newcommand\piclabel{Рис.}
+\newcommand\tablabel{Таблица\thinspace}
+%\newcommand\tablabel{Табл.}
+\newcommand\appendixLabel{Приложение\thinspace}
+
+
